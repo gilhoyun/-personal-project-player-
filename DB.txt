@@ -72,6 +72,8 @@ CREATE TABLE teams (
     age VARCHAR(20) NOT NULL,
     stadium VARCHAR(20) NOT NULL,
     region VARCHAR(20) NOT NULL,
+    wins int DEFAULT 0,
+    losses  int DEFAULT 0,
     cellphoneNum VARCHAR(20) NOT NULL
 );
 
