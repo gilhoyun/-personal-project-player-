@@ -34,8 +34,21 @@ public class UsrTeamsController {
     }
     
     @RequestMapping("/usr/member/myTeams")
-    public String myTeams() {
-      
+    public String myTeams(Model model) {
+        int loginedMemberId = rq.getLoginedMemberId();
+
+        if (loginedMemberId == 0) {
+            return "redirect:/usr/member/login";
+        }
+
+        Teams team = teamsService.getTeamsByLoginedMember(loginedMemberId);
+        model.addAttribute("hasTeamRegistered", team);
+
+        if (team != null) {
+            List<String> acceptedMembersNicknames = teamsService.getAcceptedTeamMembersNicknames(team.getId());
+            model.addAttribute("acceptedMemberNicknames", acceptedMembersNicknames);
+        }
+
         return "usr/member/myTeams";
     }
 
@@ -132,13 +145,18 @@ public class UsrTeamsController {
     
     @RequestMapping("/usr/member/teams/viewTeam")
     public String viewTeam(@RequestParam int teamId, Model model) {
-        Teams team = teamsService.getTeamById(teamId);
+        int loginedMemberId = rq.getLoginedMemberId();
 
-        if (team == null) {
-            return "redirect:/usr/member/allTeams";
+        if (loginedMemberId == 0) {
+            return "redirect:/usr/member/login";
         }
 
+        Teams team = teamsService.getTeamById(teamId);
+
+        String membershipStatus = teamsService.getMembershipStatus(loginedMemberId, teamId);
+
         model.addAttribute("team", team);
+        model.addAttribute("membershipStatus", membershipStatus);
 
         return "usr/member/viewTeam";
     }
@@ -187,5 +205,52 @@ public class UsrTeamsController {
         return Util.jsReplace("팀 멤버쉽 요청이 처리되었습니다", "/usr/home/main");
     }
     
+    @RequestMapping("/usr/member/teams/viewAcceptedTeam")
+    public String viewAcceptedTeam(Model model) {
+        int loginedMemberId = rq.getLoginedMemberId();
+
+        if (loginedMemberId == 0) {
+            return "redirect:/usr/member/login";
+        }
+
+        List<Teams> acceptedTeams = teamsService.getAcceptedTeamsByMemberId(loginedMemberId);
+        model.addAttribute("acceptedTeams", acceptedTeams);
+
+        if (acceptedTeams.isEmpty()) {
+            model.addAttribute("noTeamsMessage", "가입한 팀이 없습니다. 팀에 가입 후 이용해주세요.");
+        }
+
+        return "usr/member/viewAcceptedTeam";
+    }
+    
+    @RequestMapping("/usr/member/teams/doLeaveTeam")
+    @ResponseBody
+    public String doLeaveTeam(@RequestParam int teamId, HttpSession session) {
+        int loginedMemberId = rq.getLoginedMemberId();
+
+        if (loginedMemberId == 0) {
+            return "redirect:/usr/member/login";
+        }
+
+        teamsService.leaveTeam(loginedMemberId, teamId);
+
+        session.setAttribute("teamLeaveComplete", true);
+
+        return Util.jsReplace("팀 탈퇴가 완료되었습니다", "/usr/home/main");
+    }
+    
+    @RequestMapping("/usr/member/teams/doRecordResult")
+    @ResponseBody
+    public String doRecordResult(@RequestParam int teamId, @RequestParam int wins, @RequestParam int losses) {
+        int loginedMemberId = rq.getLoginedMemberId();
+
+        if (loginedMemberId == 0) {
+            return "redirect:/usr/member/login";
+        }
+
+        teamsService.updateTeamRecord(teamId, wins, losses);
+
+        return Util.jsReplace("팀 기록이 업데이트되었습니다", "/usr/home/main");
+    }
 }
 

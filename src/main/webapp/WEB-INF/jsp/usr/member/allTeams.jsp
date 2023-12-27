@@ -28,4 +28,4 @@
 			
 
 
-			<%@ include file="../common/foot.jsp" %>
+<%@ include file="../common/foot.jsp" %>

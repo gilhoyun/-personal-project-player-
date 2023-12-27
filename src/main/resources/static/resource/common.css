@@ -882,6 +882,44 @@ img, video {
     justify-content: end;
     margin-top: 3%;
    }
+   
+.wh-myTeams{
+	margin-bottom: 10px;
+    line-height: 48px;
+    border: 1px solid #D9E0E6;
+    background-color: #F8FAFB;
+    width: 12%;
+    height: 55px;
+    border-radius: 16px;
+    padding: 14px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}   
+
+.myTeams-label{
+	font-size: 23px;
+	padding: 0 0 0 20px;
+}
+
+.myTeams-wins{
+	margin: 0 0 0 57%;
+}
+
+.btn-wide-myTeams-save{
+	line-height: 48px;
+    border: 1px solid #D9E0E6;
+    height: 58px;
+    border-radius: 16px;
+    padding: 6px 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    margin: 0% 0% 0 2%;
+    background-color: #328a5f;
+    color: white;
+}
 /*myTeams*/
 
 
@@ -957,3 +995,50 @@ img, video {
 
 /*allTemas*/
 
+/*viewTeam*/
+
+
+.btn-wide-viewTeam{
+	line-height: 48px;
+    border: 1px solid #D9E0E6;
+    width: 6%;
+    height: 58px;
+    border-radius: 16px;
+    padding: 5px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    margin: 0% 0% 4% 80%;
+    background-color: #328a5f;
+    color: white;
+    display: block;
+}
+
+
+/*viewTeam*/
+
+
+
+/*viewAcceptTeam*/
+
+
+.btn-wide-viewAcceptTeam{
+	line-height: 48px;
+    border: 1px solid #D9E0E6;
+    width: 6%;
+    height: 58px;
+    border-radius: 16px;
+    padding: 5px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    margin: 0% 0% 4% 80%;
+    background-color: #328a5f;
+    color: white;
+    display: block;
+}
+
+
+/*viewAcceptTeam*/

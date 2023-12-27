@@ -87,8 +87,26 @@ CREATE TABLE team (
     cellphoneNum VARCHAR(20) NOT NULL
 );
 
+CREATE TABLE team_membership_request (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    team_id INT UNSIGNED NOT NULL,
+    member_id INT UNSIGNED NOT NULL,
+    STATUS VARCHAR(20) NOT NULL,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME,
+    nickname VARCHAR(20) NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES teams(id),
+    FOREIGN KEY (member_id) REFERENCES MEMBER(id)
+);
 
 
+CREATE TABLE team_member (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    team_id INT UNSIGNED NOT NULL,
+    member_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES teams(id),
+    FOREIGN KEY (member_id) REFERENCES `member`(id)
+);
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -96,7 +114,7 @@ updateDate = NOW(),
 memberId = 3,
 boardId = 1,
 title = '22시에 수원에서 6대6으로 풋살하실분~~~~~',
-`body` = '공지내용2';
+`BODY` = '공지내용2';
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -104,7 +122,7 @@ updateDate = NOW(),
 memberId = 2,
 boardId = 1,
 title = '9시에 잠실에서 4대4로 풋살하실분들 구합니다.',
-`body` = '공지내용3';
+`BODY` = '공지내용3';
 
 INSERT INTO article
 SET regDate = NOW(),
@@ -170,6 +188,18 @@ authLevel = 2,
 nickname = 'user2',
 cellphoneNum = '010-2222-3333',
 email = 'test2@test2.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test3',
+loginPw = SHA2('test3', 256),
+authLevel = 2,
+`name` = '유저3',
+nickname = 'user3',
+cellphoneNum = '010-2222-3333',
+email = 'test3@test3.com';
+
 
 INSERT INTO board
 SET regDate = NOW(),
@@ -284,6 +314,8 @@ SELECT * FROM board;
 SELECT * FROM recommendPoint;
 SELECT * FROM reply;
 SELECT * FROM teams;
+SELECT * FROM team_membership_request;
+SELECT * FROM team_member;
 
 
 SELECT LAST_INSERT_ID();

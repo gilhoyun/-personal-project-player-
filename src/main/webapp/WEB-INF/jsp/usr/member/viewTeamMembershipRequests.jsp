@@ -8,7 +8,7 @@
 
 			<section class="mt-8-myTeams text-xl">
 				<div class="container mx-auto px-3 pb-8">
-					<h2 class="text-2xl font-bold mb-4">팀 멤버쉽 요청</h2>
+					<h2 class="text-2xl font-bold mb-4">팀 가입 요청</h2>
 					<div class="table-box-type">
 						<table class="table table-lg">
 							<tr>

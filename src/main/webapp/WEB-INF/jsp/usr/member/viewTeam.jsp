@@ -35,11 +35,11 @@
 				</div>
 			</section>
 
-			<c:if test="${empty rq.hasTeamRegistered}">
-				<form action="/usr/member/teams/requestToJoinTeam" method="post">
-					<input type="hidden" name="teamId" value="${team.id}" />
-					<button type="submit" class="btn btn-wide-myTeams-join">팀 가입 신청</button>
-				</form>
-			</c:if>
+				<c:if test="${empty rq.hasTeamRegistered && membershipStatus != 'ACCEPT'}">
+					<form action="/usr/member/teams/requestToJoinTeam" method="post">
+						<input type="hidden" name="teamId" value="${team.id}" />
+						<button type="" class="btn btn-wide-viewTeam">팀 가입 신청</button>
+					</form>
+				</c:if>
 
 			<%@ include file="../common/foot.jsp" %>

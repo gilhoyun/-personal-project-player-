@@ -62,29 +62,34 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div>	
 			</section>
-
-
-			<section class="my-3 text-2xl">
-				<div class="container mx-auto px-3">
-					<h2>My Team Members</h2>
-					<table class="table table-lg">
-						<thead>
+			<section class="myTeams-wins">
+				<form id="recordResultForm" action="/usr/member/teams/doRecordResult" method="post">
+					<input type="hidden" name="teamId" value="${rq.hasTeamRegistered.id}">
+					<label class="myTeams-label" for="wins">승:</label>
+					<input class="input wh-myTeams" type="text" name="wins" id="wins" value="${rq.hasTeamRegistered.wins}">
+					<label class="myTeams-label" for="losses">패:</label>
+					<input class="input wh-myTeams" type="text" name="losses" id="losses" value="${rq.hasTeamRegistered.losses}">
+					<button class="btn btn-wide-myTeams-save" onclick="recordResult()">기록 저장</button>
+				</form>
+		    </section>
+			<section class="mt-8-myTeams text-xl">
+				<div class="container mx-auto px-3 pb-8">
+					<h2 class="text-2xl font-bold mb-4">팀 원 명단</h2>
+					<div class="table-box-type">
+						<table class="table table-lg">
 							<tr>
-								<th>Nickname</th>
-								<!-- Add more columns based on your Member model attributes -->
+								<th>닉네임</th>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="member" items="${teamMembers}">
+							<c:forEach var="nickname" items="${acceptedMemberNicknames}">
 								<tr>
-									<td>${member.nickname}</td>
-									<!-- Add more columns based on your Member model attributes -->
+									<td>${nickname}</td>
 								</tr>
 							</c:forEach>
-						</tbody>
-					</table>
+						</table>
+					</div>
 				</div>
 			</section>
+
 			<%@ include file="../common/foot.jsp" %>

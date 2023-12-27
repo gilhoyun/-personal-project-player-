@@ -68,12 +68,33 @@ public class TeamsService {
 	    teamsDao.updateMembershipRequestStatus(requestId, status);
 	}
 	
-	public List<Member> getTeamMembersByNickname(int loginedMemberId) {
-	    Teams userTeam = teamsDao.getTeamsByLoginedMember(loginedMemberId);
-	    if (userTeam == null) {
-	        return Collections.emptyList();
-	    }
-	    return teamsDao.getTeamMembersByTeamId(userTeam.getId());
+	public List<Member> getTeamMembersByNickname(int teamId, String nickname) {
+	    return teamsDao.getTeamMembersByNickname(teamId, nickname);
+	}
+	
+	public List<Member> getTeamMembersByTeamId(int teamId) {
+        return teamsDao.getTeamMembersByTeamId(teamId);
+    }
+	
+	public List<String> getAcceptedTeamMembersNicknames(int teamId) {
+        return teamsDao.getAcceptedTeamMembersNicknames(teamId);
+    }
+	
+	public String getMembershipStatus(int memberId, int teamId) {
+	    return teamsDao.getMembershipStatus(memberId, teamId);
+	}
+	
+	public List<Teams> getAcceptedTeamsByMemberId(int memberId) {
+	    return teamsDao.getAcceptedTeamsByMemberId(memberId);
+	}
+	
+	public void leaveTeam(int memberId, int teamId) {
+	    teamsDao.leaveTeam(memberId, teamId);
+	}
+
+	public void updateTeamRecord(int teamId, int wins, int losses) {
+		teamsDao.updateTeamRecord(teamId, wins, losses);
+		
 	}
 }
 

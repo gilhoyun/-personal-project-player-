@@ -76,34 +76,79 @@ public interface TeamsDao {
 	@Select("SELECT * FROM teams WHERE captain_id = #{teamId}")
 	Teams getTeamById(int teamId);
 	
-	 @Insert("""
-	            INSERT INTO team_membership_request 
-	            (team_id, member_id, status, regDate)
-	            VALUES 
-	            (#{teamId}, #{memberId}, 'REQUEST', NOW())
-	            """)
-	    void requestToJoinTeam(@Param("teamId") int teamId, @Param("memberId") int memberId);
+	@Insert("""
+		    INSERT INTO team_membership_request 
+		    (team_id, member_id, status, regDate, nickname) 
+		    SELECT #{teamId}, #{memberId}, 'REQUEST', NOW(), nickname 
+		    FROM member 
+		    WHERE id = #{memberId}
+		    """)
+	void requestToJoinTeam(@Param("teamId") int teamId, @Param("memberId") int memberId);
 
-	    @Update("""
+	@Update("""
 	            UPDATE team_membership_request 
 	            SET status = #{status}, updateDate = NOW()
 	            WHERE id = #{requestId}
 	            """)
-	    void updateMembershipRequestStatus(@Param("requestId") int requestId, @Param("status") String status);
+	void updateMembershipRequestStatus(@Param("requestId") int requestId, @Param("status") String status);
 
-	    @Select("""
-	    	    SELECT tmr.*, m.nickname
-	    	    FROM team_membership_request AS tmr
-	    	    JOIN member AS m ON tmr.member_id = m.id
-	    	    WHERE team_id = #{teamId} AND status = 'REQUEST'
-	    	""")
-	    	List<TeamMembershipRequest> getPendingMembershipRequests(int teamId);
+	@Select("""
+			SELECT tmr.*, m.nickname AS acceptedMemberNickname
+			FROM team_membership_request AS tmr
+			JOIN member AS m ON tmr.member_id = m.id
+			WHERE team_id = #{teamId} AND status = 'REQUEST'
+			""")
+	List<TeamMembershipRequest> getPendingMembershipRequests(int teamId);
 	    
-	    @Select("""
-	    		SELECT m.* 
-	    		FROM team_member AS tm 
-	    		JOIN `member` AS m ON tm.member_id = m.id 
-	    		WHERE tm.team_id = #{teamId}
-	    		""")
-	    List<Member> getTeamMembersByTeamId(int teamId);
+	 @Select("""
+	            SELECT m.* 
+	            FROM team_membership_request AS tmr
+	            JOIN member AS m ON tmr.member_id = m.id
+	            WHERE tmr.team_id = #{teamId} AND tmr.status = 'REQUEST' AND m.nickname = #{nickname}
+	            """)
+	 List<Member> getTeamMembersByNickname(@Param("teamId") int teamId, @Param("nickname") String nickname);
+	    
+	 @Select("""
+	            SELECT m.*
+	            FROM team_member AS tm
+	            JOIN member AS m ON tm.member_id = m.id
+	            WHERE tm.team_id = #{teamId}
+	        """)
+	 List<Member> getTeamMembersByTeamId(int teamId);
+	 
+	 @Select("""
+		        SELECT m.nickname
+		        FROM team_membership_request AS tmr
+		        JOIN member AS m ON tmr.member_id = m.id
+		        WHERE team_id = #{teamId} AND status = 'ACCEPT'
+		        """)
+	List<String> getAcceptedTeamMembersNicknames(int teamId);
+	 
+	 @Select("""
+		        SELECT status 
+		        FROM team_membership_request
+		        WHERE member_id = #{memberId} AND team_id = #{teamId}
+		        """)
+	String getMembershipStatus(@Param("memberId") int memberId, @Param("teamId") int teamId);
+	 
+	 @Select("""
+		        SELECT t.*
+		        FROM teams t
+		        INNER JOIN team_membership_request tmr ON t.id = tmr.team_id
+		        WHERE tmr.member_id = #{memberId} AND tmr.status = 'ACCEPT'
+		        """)
+	List<Teams> getAcceptedTeamsByMemberId(@Param("memberId") int memberId);
+	 
+	 @Delete("""
+		        DELETE FROM team_membership_request 
+		        WHERE member_id = #{memberId} AND team_id = #{teamId}
+		        """)
+	void leaveTeam(@Param("memberId") int memberId, @Param("teamId") int teamId);
+	 
+	 @Update("""
+			    UPDATE teams 
+			    SET wins = #{wins}, losses = #{losses}
+			    WHERE captain_id = #{teamId}
+			    """)
+	void updateTeamRecord(@Param("teamId") int teamId, @Param("wins") int wins, @Param("losses") int losses);
 }

@@ -32,16 +32,15 @@
 		<ul class="flex">
             <c:choose>
 				<c:when test="${empty rq.hasTeamRegistered}">
-					<li><a class="h-full px-3 flex items-center" href="/usr/member/teams"><span>팀 등록</span></a></li>
+                    <li><a class="h-full px-3 flex items-center" href="/usr/member/teams"><span>팀 등록</span></a></li>
+                    <li><a class="h-full px-3 flex items-center" href="/usr/member/teams/viewAcceptedTeam"><span>가입한 팀</span></a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a class="h-full px-3 flex items-center" href="/usr/member/myTeams"><span>내 팀</span></a></li>
-					<li><a class="h-full px-3 flex items-center" href="/usr/member/myTeams/viewTeamMembershipRequests"><span>팀멤버</span></a></li>
+					<li><a class="h-full px-3 flex items-center" href="/usr/member/myTeams/viewTeamMembershipRequests"><span>팀 가입요청</span></a></li>
 				</c:otherwise>
-			</c:choose>
+			</c:choose>	
 			<li><a class="h-full px-3 flex items-center" href="/usr/member/allTeams"><span>전체 팀</span></a></li>
-			<c:if test="${rq.getLoginedMemberId() != 0 }">
-            </c:if>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
 				<li><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>자유게시판</span></a></li>
 				<li><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>로그인</span></a></li>

@@ -19,5 +19,8 @@ public class Teams {
 	private String stadium;
 	private String region;
 	private String cellphoneNum ;
+	private int wins;
+	private int losses;
 	private List<TeamMembershipRequest> membershipRequests;
+	private List<Member> members;
 }
