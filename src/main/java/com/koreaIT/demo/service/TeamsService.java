@@ -96,5 +96,25 @@ public class TeamsService {
 		teamsDao.updateTeamRecord(teamId, wins, losses);
 		
 	}
+	
+	public List<Teams> getBeginnerTeams() {
+	    return teamsDao.getBeginnerTeams();
+	}
+	
+	public List<Teams> getTeamsWithScoreBetween21And40() {
+	    return teamsDao.getTeamsWithScoreBetween21And40();
+	}
+
+	public List<Teams> getTeamsWithScoreBetween41And60() {
+		return teamsDao.getTeamsWithScoreBetween41And60();
+	}
+
+	public List<Teams> getTeamsWithScoreBetween61And80() {
+		return teamsDao.getTeamsWithScoreBetween61And80();
+	}
+	
+	public List<String> getAcceptedTeamMembersPhoneNumbers(int teamId) {
+	    return teamsDao.getAcceptedTeamMembersPhoneNumbers(teamId);
+	}
 }
 

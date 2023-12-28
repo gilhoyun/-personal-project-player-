@@ -18,5 +18,6 @@ public class TeamMembershipRequest {
     private LocalDateTime updateDate;
     private Member member;
     private String nickname;
+    private String cellphoneNum;
     private String acceptedMemberNickname; 
 }

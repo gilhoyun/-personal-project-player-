@@ -81,10 +81,12 @@
 						<table class="table table-lg">
 							<tr>
 								<th>닉네임</th>
+								<th>전화번호</th>
 							</tr>
-							<c:forEach var="nickname" items="${acceptedMemberNicknames}">
+							<c:forEach var="index" begin="0" end="${acceptedMemberNicknames.size() - 1}">
 								<tr>
-									<td>${nickname}</td>
+									<td>${acceptedMemberNicknames[index]}</td>
+									<td>${acceptedMemberPhoneNumbers[index]}</td>
 								</tr>
 							</c:forEach>
 						</table>

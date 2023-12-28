@@ -78,8 +78,8 @@ public interface TeamsDao {
 	
 	@Insert("""
 		    INSERT INTO team_membership_request 
-		    (team_id, member_id, status, regDate, nickname) 
-		    SELECT #{teamId}, #{memberId}, 'REQUEST', NOW(), nickname 
+		    (team_id, member_id, status, regDate, nickname, cellphoneNum) 
+		    SELECT #{teamId}, #{memberId}, 'REQUEST', NOW(), nickname, cellphoneNum 
 		    FROM member 
 		    WHERE id = #{memberId}
 		    """)
@@ -151,4 +151,42 @@ public interface TeamsDao {
 			    WHERE captain_id = #{teamId}
 			    """)
 	void updateTeamRecord(@Param("teamId") int teamId, @Param("wins") int wins, @Param("losses") int losses);
+	 
+	 @Select("""
+		        SELECT *
+		        FROM teams
+		        WHERE wins <= 20
+		        """)
+	List<Teams> getBeginnerTeams();
+	 
+	 @Select("""
+			    SELECT id, teamName, age 
+			    FROM teams 
+			    WHERE wins >= 21 AND wins <= 40
+			""")
+	List<Teams> getTeamsWithScoreBetween21And40();
+
+	 
+	 @Select("""
+			    SELECT id, teamName, age 
+			    FROM teams 
+			    WHERE wins >= 41 AND wins <= 60
+			""")
+	List<Teams> getTeamsWithScoreBetween41And60();
+
+	 
+	 @Select("""
+			    SELECT id, teamName, age 
+			    FROM teams 
+			    WHERE wins >= 61 AND wins <= 80
+			""")
+	List<Teams> getTeamsWithScoreBetween61And80();
+	 
+	 @Select("""
+		        SELECT tmr.cellphoneNum 
+		        FROM team_membership_request AS tmr
+		        JOIN member AS m ON tmr.member_id = m.id
+		        WHERE team_id = #{teamId} AND status = 'ACCEPT'
+		        """)
+		List<String> getAcceptedTeamMembersPhoneNumbers(int teamId);
 }

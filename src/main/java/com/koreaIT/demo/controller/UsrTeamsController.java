@@ -47,6 +47,9 @@ public class UsrTeamsController {
         if (team != null) {
             List<String> acceptedMembersNicknames = teamsService.getAcceptedTeamMembersNicknames(team.getId());
             model.addAttribute("acceptedMemberNicknames", acceptedMembersNicknames);
+            
+            List<String> acceptedMembersPhoneNumbers = teamsService.getAcceptedTeamMembersPhoneNumbers(team.getId());
+            model.addAttribute("acceptedMemberPhoneNumbers", acceptedMembersPhoneNumbers);
         }
 
         return "usr/member/myTeams";
@@ -251,6 +254,34 @@ public class UsrTeamsController {
         teamsService.updateTeamRecord(teamId, wins, losses);
 
         return Util.jsReplace("팀 기록이 업데이트되었습니다", "/usr/home/main");
+    }
+    
+    @RequestMapping("/usr/member/teams/beginnerTeams")
+    public String showBeginnerTeams(Model model) {
+        List<Teams> beginnerTeams = teamsService.getBeginnerTeams();
+        model.addAttribute("beginnerLeagueTeams", beginnerTeams);
+        return "usr/member/beginnerTeams";
+    }
+    
+    @RequestMapping("/usr/member/teams/thirdLeagueTeams")
+    public String showThirdLeagueTeams(Model model) {
+        List<Teams> thirdLeagueTeams = teamsService.getTeamsWithScoreBetween21And40();
+        model.addAttribute("thirdLeagueTeams", thirdLeagueTeams);
+        return "usr/member/thirdLeagueTeams";
+    }
+    
+    @RequestMapping("/usr/member/teams/secondLeagueTeams")
+    public String showSecondLeagueTeams(Model model) {
+        List<Teams> secondLeagueTeams = teamsService.getTeamsWithScoreBetween41And60();
+        model.addAttribute("secondLeagueTeams", secondLeagueTeams);
+        return "usr/member/secondLeagueTeams";
+    }
+    
+    @RequestMapping("/usr/member/teams/firstLeagueTeams")
+    public String showFirstLeagueTeams(Model model) {
+        List<Teams> firstLeagueTeams = teamsService.getTeamsWithScoreBetween61And80();
+        model.addAttribute("firstLeagueTeams", firstLeagueTeams);
+        return "usr/member/firstLeagueTeams";
     }
 }
 

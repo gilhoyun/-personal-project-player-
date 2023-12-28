@@ -1042,3 +1042,37 @@ img, video {
 
 
 /*viewAcceptTeam*/
+
+
+
+.btn-wide-viewTeamMembership-accpet{
+	line-height: 38px;
+    border: 1px solid #D9E0E6;
+    height: 42px;
+    border-radius: 10px;
+    padding: 6px 17px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    margin: 0% 0% 3% 2%;
+    background-color: #328a5f;
+    color: white;
+}
+
+.btn-wide-viewTeamMembership-refuse{
+	line-height: 38px;
+    border: 1px solid #D9E0E6;
+    height: 42px;
+    border-radius: 10px;
+    padding: 6px 17px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    margin: 0% 0% 3% 2%;
+    background-color: #cf3232;
+    color: white;
+}
+
+

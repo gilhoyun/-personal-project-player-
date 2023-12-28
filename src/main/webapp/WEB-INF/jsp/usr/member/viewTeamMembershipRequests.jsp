@@ -27,13 +27,13 @@
 											method="post">
 											<input type="hidden" name="requestId" value="${request.id}" />
 											<input type="hidden" name="status" value="ACCEPT" />
-											<button type="submit" class="btn btn-sm-myTeams-accept">수락</button>
+											<button type="" class="btn btn-wide-viewTeamMembership-accpet">수락</button>
 										</form>
 										<form action="/usr/member/myTeams/doUpdateMembershipRequestStatus"
 											method="post">
 											<input type="hidden" name="requestId" value="${request.id}" />
 											<input type="hidden" name="status" value="REJECT" />
-											<button type="submit" class="btn btn-sm-myTeams-reject">거절</button>
+											<button type="" class="btn btn-wide-viewTeamMembership-refuse">거절</button>
 										</form>
 									</td>
 								</tr>
