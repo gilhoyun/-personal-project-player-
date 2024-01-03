@@ -75,7 +75,7 @@ html > body .ProseMirror, html > body .toastui-editor-contents {
 }
 
 .footerNav h3 {
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 5px;
 }
 
@@ -197,7 +197,7 @@ img{
 }
 
 .navigation--container .navigation--wrapper {
-    margin: 40px 410px;
+    margin: 40px 9%;
     display: flex;
     padding: 14px 20px;
     white-space: nowrap;
@@ -303,7 +303,7 @@ img, video {
 }
 
 .mt-8-main{
-	padding: 0% 32% 2% 10%;
+	padding: 0% 32% 2% 5%;
 }
 
 #dateNav {
@@ -314,6 +314,15 @@ img, video {
     position: sticky;
     top: 0;
 }
+
+.side-main{
+	margin: 5% 0 5% 14%;
+}
+
+.reserveResult-main{
+	margin: 0 0 0 11%;
+}
+
 
 /*main*/
 
@@ -1044,6 +1053,7 @@ img, video {
 /*viewAcceptTeam*/
 
 
+/*viewTeamMembership*/
 
 .btn-wide-viewTeamMembership-accpet{
 	line-height: 38px;
@@ -1074,5 +1084,30 @@ img, video {
     background-color: #cf3232;
     color: white;
 }
+
+/*viewTeamMembership*/
+
+
+
+/*reserveResult*/
+
+
+.reserveResult {
+    list-style: none;
+    margin: 0 0 0 14%;
+}
+
+.reserveResult li {
+    display: inline-block;
+    margin-right: 20px; /* Adjust as needed for space between groupings */
+    margin-bottom: 20px; /* Adds space below each grouping */
+}
+
+.side{
+	margin: 0 0 0 10%;
+}
+
+/*reserveResult*/
+
 
 

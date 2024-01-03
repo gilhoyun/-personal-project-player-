@@ -30,7 +30,7 @@
             <ul class="footerDul">
                 <h3>서비스 지역</h3>
                 <li>
-                    <a href="">충남</a>
+                    <a href="">서울</a>
                 </li>
             </ul>
             <ul>

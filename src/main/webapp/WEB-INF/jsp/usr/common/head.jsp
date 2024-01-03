@@ -52,7 +52,7 @@
 			</c:if>
 		</ul>
 	</div>
-	<div class="navigation--container mx-auto">
+	<div class="navigation--container">
 		<div class="navigation--wrapper flex">
 			<div class="navigation--item">
 				<a class="flex" href="/usr/article/list?boardId=1">매칭</a>
