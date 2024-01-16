@@ -77,6 +77,7 @@ public class UsrMemberController {
 		return Util.jsReplace(Util.f("%s님의 가입이 완료되었습니다", name), "login");
 	}
 	
+	
 	@RequestMapping("/usr/member/login")
 	public String login() {
 		return "usr/member/login";

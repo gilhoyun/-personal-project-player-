@@ -72,22 +72,11 @@ CREATE TABLE teams (
     age VARCHAR(20) NOT NULL,
     stadium VARCHAR(20) NOT NULL,
     region VARCHAR(20) NOT NULL,
-    wins int DEFAULT 0,
-    losses  int DEFAULT 0,
+    wins INT DEFAULT 0,
+    losses  INT DEFAULT 0,
     cellphoneNum VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE team (
-    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    captain_id INT UNSIGNED NOT NULL,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
-    teamName VARCHAR(20) NOT NULL,
-    age VARCHAR(20) NOT NULL,
-    stadium VARCHAR(20) NOT NULL,
-    region VARCHAR(20) NOT NULL,
-    cellphoneNum VARCHAR(20) NOT NULL
-);
 
 CREATE TABLE team_membership_request (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,6 +86,7 @@ CREATE TABLE team_membership_request (
     regDate DATETIME NOT NULL,
     updateDate DATETIME,
     nickname VARCHAR(20) NOT NULL,
+    cellphoneNum VARCHAR(20) NOT NULL,
     FOREIGN KEY (team_id) REFERENCES teams(id),
     FOREIGN KEY (member_id) REFERENCES MEMBER(id)
 );
@@ -318,6 +308,7 @@ SELECT * FROM reply;
 SELECT * FROM teams;
 SELECT * FROM team_membership_request;
 SELECT * FROM team_member;
+
 
 
 SELECT LAST_INSERT_ID();

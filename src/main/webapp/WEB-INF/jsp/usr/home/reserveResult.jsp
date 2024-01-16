@@ -14,10 +14,7 @@
                                     <div>
 
                                         <c:out value="${facility.getAreaName()}" /><br>
-                                        -<a href="https://www.eshare.go.kr/UserPortal/adv/resources/AdvEsSearchResourcesMainView.do?rsrcClsCd=010505&sido=11"
-                                            class="hover:underline">
-                                            <c:out value="${facility.getPlaceName()}" />
-                                        </a><br>
+                                        -<a href="https://www.eshare.go.kr/UserPortal/adv/resources/AdvEsSearchResourcesMainView.do?rsrcClsCd=010505&sido=11" class="hover:underline"><c:out value="${facility.getPlaceName()}" /></a><br>
                                         -결제여부:
                                         <c:out value="${facility.getPayatName()}" /><br>
                                         -전화번호:

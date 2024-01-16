@@ -38,7 +38,7 @@
 				<c:if test="${empty rq.hasTeamRegistered && membershipStatus != 'ACCEPT'}">
 					<form action="/usr/member/teams/requestToJoinTeam" method="post">
 						<input type="hidden" name="teamId" value="${team.id}" />
-						<button type="" class="btn btn-wide-viewTeam">팀 가입 신청</button>
+						<button type="" class="btn btn-wide-viewTeam">가입 신청</button>
 					</form>
 				</c:if>
 
