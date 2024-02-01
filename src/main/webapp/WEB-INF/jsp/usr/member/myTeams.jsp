@@ -62,18 +62,20 @@
 							</form>
 						</div>
 					</div>
-				</div>	
+				</div>
 			</section>
 			<section class="myTeams-wins">
 				<form id="recordResultForm" action="/usr/member/teams/doRecordResult" method="post">
 					<input type="hidden" name="teamId" value="${rq.hasTeamRegistered.id}">
 					<label class="myTeams-label" for="wins">승:</label>
-					<input class="input wh-myTeams" type="text" name="wins" id="wins" value="${rq.hasTeamRegistered.wins}">
+					<input class="input wh-myTeams" type="text" name="wins" id="wins"
+						value="${rq.hasTeamRegistered.wins}">
 					<label class="myTeams-label" for="losses">패:</label>
-					<input class="input wh-myTeams" type="text" name="losses" id="losses" value="${rq.hasTeamRegistered.losses}">
+					<input class="input wh-myTeams" type="text" name="losses" id="losses"
+						value="${rq.hasTeamRegistered.losses}">
 					<button class="btn btn-wide-myTeams-save" onclick="recordResult()">기록 저장</button>
 				</form>
-		    </section>
+			</section>
 			<section class="mt-8-myTeams text-xl">
 				<div class="container mx-auto px-3 pb-8">
 					<h2 class="text-2xl font-bold mb-4">팀 원 명단</h2>
@@ -83,12 +85,15 @@
 								<th>닉네임</th>
 								<th>전화번호</th>
 							</tr>
-							<c:forEach var="index" begin="0" end="${acceptedMemberNicknames.size() - 1}">
-								<tr>
-									<td>${acceptedMemberNicknames[index]}</td>
-									<td>${acceptedMemberPhoneNumbers[index]}</td>
-								</tr>
-							</c:forEach>
+							<c:if test="${not empty acceptedMemberNicknames}">
+								<c:forEach var="index" begin="0" end="${acceptedMemberNicknames.size() - 1}"
+									varStatus="loop">
+									<tr>
+										<td>${acceptedMemberNicknames[loop.index]}</td>
+										<td>${acceptedMemberPhoneNumbers[loop.index]}</td>
+									</tr>
+								</c:forEach>
+							</c:if>
 						</table>
 					</div>
 				</div>

@@ -15,10 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.koreaIT.demo.service.FileService;
+import com.koreaIT.demo.service.MemberService;
 import com.koreaIT.demo.vo.FacilityDetails;
+import com.koreaIT.demo.vo.Rq;
 
 @Controller
 public class UsrHomeController {
+	
+	private FileService fileService;
+	private MemberService memberService;
+	private Rq rq;
+	
+	public UsrHomeController(FileService fileService, MemberService memberService, Rq rq) {
+		this.fileService = fileService;
+		this.memberService = memberService;
+		this.rq = rq;
+	}
 
 	@RequestMapping("/usr/home/main")
 	public String showMain(Model model) {
@@ -82,6 +95,7 @@ public class UsrHomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		model.addAttribute("member", memberService.getMemberById(rq.getLoginedMemberId()));
 		return "usr/home/main";
 	}
 	

@@ -1,5 +1,7 @@
 package com.koreaIT.demo.controller;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,13 @@ import com.koreaIT.demo.vo.Member;
 import com.koreaIT.demo.vo.ResultData;
 import com.koreaIT.demo.vo.Rq;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UsrMemberController {
 	
@@ -20,6 +29,19 @@ public class UsrMemberController {
 	UsrMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
 		this.rq = rq;
+	}
+	
+	@WebServlet("/logout")
+	public class LogoutServlet extends HttpServlet {
+	    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	            throws ServletException, IOException {
+	        // Get the session and invalidate it
+	        HttpSession session = request.getSession();
+	        session.invalidate();
+
+	        // Redirect to the login page or any other page after logout
+	        response.sendRedirect(request.getContextPath() + "/login.jsp");
+	    }
 	}
 	
 	@RequestMapping("/usr/member/join")
@@ -101,6 +123,10 @@ public class UsrMemberController {
 		
 		if (member.getLoginPw().equals(Util.sha256(loginPw)) == false) {
 			return Util.jsHistoryBack("비밀번호를 확인해주세요");
+		}
+		
+		if (member.getDelStatus() == 1) {
+			return Util.jsHistoryBack("사용할 수 없는 계정입니다");
 		}
 		
 		rq.login(member);

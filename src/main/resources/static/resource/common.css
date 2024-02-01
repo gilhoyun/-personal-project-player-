@@ -197,7 +197,7 @@ img{
 }
 
 .navigation--container .navigation--wrapper {
-    margin: 40px 9%;
+    margin: 40px 13%;
     display: flex;
     padding: 14px 20px;
     white-space: nowrap;
@@ -381,7 +381,34 @@ img, video {
 } 
 /*list*/
 
+/*list list*/
+
+.wh-list-list{
+	margin-bottom: 10px;
+    line-height: 48px;
+    border: 1px solid #D9E0E6;
+    background-color: #F8FAFB;
+    width: 40%;
+    height: 35px;
+    border-radius: 16px;
+    padding: 14px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+}
+/*list list*/
+
 /*login*/
+
+.kakaoLogin{
+	height: 62px;
+    width: 27%;
+    margin: 0 0 0 0;
+}
+
+.kakaoLogout{
+	margin: 0 0 0 1%;
+}
 
 .headMessage-login {
     margin-bottom: 30px;

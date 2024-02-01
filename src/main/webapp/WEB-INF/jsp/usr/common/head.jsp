@@ -46,7 +46,12 @@
 				<li><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>로그인</span></a></li>
 				<li><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>회원가입</span></a></li>
 			</c:if>
-			<c:if test="${rq.getLoginedMemberId() != 0 }">				
+			<c:if test="${rq.getLoginedMemberId() != 0 }">
+				<c:choose>
+					<c:when test="${member.authLevel == 1 }">
+						<li><a class="h-full px-3 flex items-center" href="/adm/member/list"><span>회원관리</span></a></li>
+					</c:when>
+				</c:choose>				
 				<li><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>마이페이지</span></a></li>
 				<li><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>로그아웃</span></a></li>
 			</c:if>

@@ -1,5 +1,7 @@
 package com.koreaIT.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +73,28 @@ public class MemberService {
 
 	private void setTempPassword(Member member, String tempPassword) {
 		memberDao.doPasswordModify(member.getId(), Util.sha256(tempPassword));
+	}
+	
+	public int getMembersCnt(String authLevel, String searchKeywordType, String searchKeyword) {
+		return memberDao.getMembersCnt(authLevel, searchKeywordType, searchKeyword);
+	}
+
+	public List<Member> getMembers(String authLevel, String searchKeywordType, String searchKeyword, int limitStart,
+			int itemsInAPage) {
+		return memberDao.getMembers(authLevel, searchKeywordType, searchKeyword, limitStart, itemsInAPage);
+	}
+
+	public void deleteMembers(List<String> ids) {
+		for (String idStr : ids) {
+			Member member = getMemberById(Integer.parseInt(idStr));
+			
+			if (member != null) {
+				deleteMember(member.getId());
+			}
+		}
+	}
+	
+	private void deleteMember(int id) {
+		memberDao.deleteMember(id);
 	}
 }
